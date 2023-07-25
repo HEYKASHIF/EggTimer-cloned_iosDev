@@ -20,7 +20,8 @@ class ViewController: UIViewController
     
     @IBAction func hardnessSelected(_ sender: UIButton)
     {
-        progressBar.progress = 1.0
+        titleLabel.text = "How do you like eggs?"
+        progressBar.progress = 0.1
         timer.invalidate()
         print(sender.currentTitle!)
         let hardness = sender.currentTitle!
@@ -40,6 +41,7 @@ class ViewController: UIViewController
         {
             timer.invalidate()
             titleLabel.text = "Done!"
+            progressBar.progress = 1.0
         }
     }
 }
