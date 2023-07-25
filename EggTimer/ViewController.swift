@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController
+{
     @IBOutlet weak var progressBar: UIProgressView!
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -17,35 +18,28 @@ class ViewController: UIViewController {
     var ramainingTime = 60
     var timer = Timer()
     
-    @IBAction func hardnessSelected(_ sender: UIButton) {
+    @IBAction func hardnessSelected(_ sender: UIButton)
+    {
         progressBar.progress = 1.0
         timer.invalidate()
-        
         print(sender.currentTitle!)
-        
         let hardness = sender.currentTitle!
-        
         print(eggTimes[hardness]!)
-        
         ramainingTime = eggTimes[hardness]!
-        
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
     }
-    @objc func update() {
+    
+    @objc func update()
+    {
         if(ramainingTime > 0)
         {
             print("\(ramainingTime) seconds.")
-            
             ramainingTime -= 1
         }
         else
         {
             timer.invalidate()
             titleLabel.text = "Done!"
-        
         }
-        // Something cool
     }
-    
-
 }
