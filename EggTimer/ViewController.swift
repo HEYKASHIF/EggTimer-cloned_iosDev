@@ -9,27 +9,32 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let eggTimes = ["Soft": 5, "Medium": 7, "Hard": 12]
-//    var timer = 60
-//    func countdown() {
-//        timer -= 1
-//    }
-
+   
     
+    let eggTimes = ["Soft": 300, "Medium": 420, "Hard": 720]
+    var ramainingTime = 60
     
     
     @IBAction func hardnessSelected(_ sender: UIButton) {
-    
         
-
-//        var clock = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: Selector(("countdown")), userInfo: nil, repeats: true)
-
         print(sender.currentTitle!)
         
         let hardness = sender.currentTitle!
+        
         print(eggTimes[hardness]!)
         
+        ramainingTime = eggTimes[hardness]!
         
+        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
+    }
+    @objc func update() {
+        if(ramainingTime > 0)
+        {
+            print("\(ramainingTime) seconds.")
+            
+            ramainingTime -= 1
+        }
+        // Something cool
     }
     
 
