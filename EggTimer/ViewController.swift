@@ -7,9 +7,21 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController
 {
+    var player: AVAudioPlayer!
+    override func viewDidLoad() {
+            super.viewDidLoad()
+        }
+    func playSound() {
+            let url = Bundle.main.url(forResource: "alarm_sound", withExtension: "mp3")
+            player = try! AVAudioPlayer(contentsOf: url!)
+            player.play()
+                    
+        }
+    
     @IBOutlet weak var progressBar: UIProgressView!
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -41,6 +53,7 @@ class ViewController: UIViewController
             timer.invalidate()
             titleLabel.text = "Done!"
             progressBar.progress = 1.0
+            playSound()
         }
     }
 }
