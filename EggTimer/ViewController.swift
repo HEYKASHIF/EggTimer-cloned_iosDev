@@ -15,33 +15,33 @@ class ViewController: UIViewController
     @IBOutlet weak var titleLabel: UILabel!
     
     let eggTimes = ["Soft": 3, "Medium": 4, "Hard": 7]
-    var ramainingTime = 60
+    var totalTime = 0
+    var secondPassed = 0
     var timer = Timer()
     
     @IBAction func hardnessSelected(_ sender: UIButton)
     {
         titleLabel.text = "How do you like eggs?"
-        progressBar.progress = 0.1
         timer.invalidate()
         print(sender.currentTitle!)
         let hardness = sender.currentTitle!
         print(eggTimes[hardness]!)
-        ramainingTime = eggTimes[hardness]!
+        totalTime = eggTimes[hardness]!
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
     }
     
     @objc func update()
     {
-        if(ramainingTime > 0)
+        if(secondPassed < totalTime)
         {
-            print("\(ramainingTime) seconds.")
-            ramainingTime -= 1
+            let percentageProgress = secondPassed/totalTime
+            progressBar.progress = Float(percentageProgress)
+            secondPassed += 1
         }
         else
         {
             timer.invalidate()
             titleLabel.text = "Done!"
-            progressBar.progress = 1.0
         }
     }
 }
