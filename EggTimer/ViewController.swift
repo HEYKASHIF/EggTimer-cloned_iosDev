@@ -21,11 +21,10 @@ class ViewController: UIViewController
     
     @IBAction func hardnessSelected(_ sender: UIButton)
     {
-        titleLabel.text = "How do you like eggs?"
-        timer.invalidate()
-        print(sender.currentTitle!)
         let hardness = sender.currentTitle!
-        print(eggTimes[hardness]!)
+        secondPassed = 0
+        titleLabel.text = hardness
+        timer.invalidate()
         totalTime = eggTimes[hardness]!
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
     }
@@ -34,14 +33,14 @@ class ViewController: UIViewController
     {
         if(secondPassed < totalTime)
         {
-            let percentageProgress = secondPassed/totalTime
-            progressBar.progress = Float(percentageProgress)
+            progressBar.progress = Float(secondPassed)/Float(totalTime)
             secondPassed += 1
         }
         else
         {
             timer.invalidate()
             titleLabel.text = "Done!"
+            progressBar.progress = 1.0
         }
     }
 }
